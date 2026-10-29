@@ -1,53 +1,70 @@
-# Bloqueo Santo
+<p align="center">
+  <img src="extension/iconos/icono128.png" width="96" alt="Bloqueo Santo">
+</p>
 
-Extensión de Chrome/Edge que bloquea los sitios que te distraen y, en su lugar, te muestra una cita de la Sagrada Escritura, el Catecismo o los santos, sobre un vitral generado con IA.
+<h1 align="center">Bloqueo Santo</h1>
 
-## Instalar para uso propio
+<p align="center"><em>Convierte cada distracción en un momento con Dios.</em></p>
 
-1. Abre `chrome://extensions` (o `edge://extensions`) y activa **Modo de desarrollador**.
-2. Pulsa **Cargar descomprimida** y elige `C:\Apps\Bloqueo Santo\extension`.
-3. Fija el icono de la cruz en la barra.
+Bloqueo Santo es una extensión gratuita para **Google Chrome** y **Microsoft Edge**. Bloquea los sitios que te distraen y, cuando intentas abrirlos, en lugar de un aviso vacío te muestra un vitral luminoso con una cita para meditar, tomada de la Sagrada Escritura, del Catecismo de la Iglesia Católica o de los santos.
 
-Después de cambiar archivos, pulsa el botón de recargar ↻ de la extensión.
+La idea es sencilla: que el momento de la tentación o de la distracción se vuelva una ocasión para crecer espiritualmente.
 
-## Uso
+<p align="center">
+  <img src="tienda/capturas/1-palabra-de-dios.png" width="720" alt="Página de bloqueo con una cita del Evangelio">
+</p>
 
-- **Bloquear:** estando en el sitio, pulsa el icono y luego **Bloquear este sitio**.
-- **Desbloquear:** en la página de bloqueo, pulsa el icono y luego **Desbloquear este sitio**.
-- **Otra palabra** (o la barra espaciadora): otra cita y otro vitral.
-- **Ajustes** (⚙ o «Ver sitios bloqueados»): lista de sitios y opción de quitar la página de bloqueo del historial, que usa un permiso opcional.
-- El café ☕ del menú abre la donación voluntaria por PayPal (1, 2 o 3 US$, u otro monto).
+## Instalación
 
-## Las citas y sus derechos
+Muy pronto estará disponible en la **Chrome Web Store** y en **Edge Add-ons**. Bastará con pulsar «Añadir» desde la tienda; no hace falta configurar nada más.
 
-Hay 136 citas: 65 de la Escritura, 49 de santos, papas y maestros espirituales, y 22 del Catecismo. Solo hay tres tipos de fuente:
+## Cómo se usa
 
-- **Dominio público:** la Biblia de Torres Amat (1823-1825) y los textos castellanos originales de santa Teresa, san Juan de la Cruz y san Ignacio.
-- **Traducción propia:** hecha desde originales de dominio público en latín, francés, italiano o inglés.
-- **Texto oficial de la Santa Sede:** el Catecismo y los documentos papales, con el crédito «© Libreria Editrice Vaticana».
+- **Bloquear un sitio:** estando en él, pulsa el icono de la cruz en la barra del navegador y luego **Bloquear este sitio**. La pestaña pasa al instante a la página de bloqueo.
+- **Desbloquearlo:** desde la página de bloqueo, pulsa el icono y luego **Desbloquear este sitio**. Volverás a la página que intentabas abrir.
+- **Otra palabra** (o la barra espaciadora): te muestra otra cita y otro vitral. Las citas recientes no se repiten.
+- **Ajustes** (el engranaje ⚙ o «Ver sitios bloqueados»): para ver y editar tu lista de sitios.
 
-El detalle de cada cita está en `tools/citas_publicacion.json`: edición, URL donde se comprobó, texto original de las traducciones y justificación de derechos.
+<p align="center">
+  <img src="tienda/capturas/4-menu.png" width="720" alt="Menú de la extensión sobre la página de bloqueo">
+</p>
 
-## Publicar en la tienda
+## Las citas
 
-1. En `extension/config.js`, pon tu usuario de PayPal.me en `paypal`.
-2. La política de privacidad está en `docs/politica-privacidad.html` y se publica con GitHub Pages en https://duv2312-art.github.io/bloqueo-santo/politica-privacidad.html
-3. Ejecuta `python tools/empaquetar.py`, que crea `tienda/bloqueo-santo-<versión>.zip`.
-4. **Chrome Web Store:** crea la cuenta de desarrollador (pago único de 5 US$) y sube el `.zip`. Copia los textos de `tienda/ficha-tienda.md` y `tienda/practicas-privacidad.md`.
-5. **Imágenes para la ficha:**
-   - capturas de 1280×800 en `tienda/capturas`;
-   - mosaico pequeño de 440×280 y marquesina de 1400×560 en `tienda/promo`.
-6. **Edge Add-ons:** en Microsoft Partner Center (gratis), el mismo `.zip` y los mismos textos.
+Hay 136 citas: 65 de la Sagrada Escritura, 49 de santos, papas y maestros espirituales, y 22 del Catecismo. Cada una lleva su autor y su referencia. Para respetar los derechos de autor, solo se usan estas fuentes:
 
-## Carpetas
+- **Dominio público.** La Escritura se cita según la traducción de *Félix Torres Amat* (1823-1825). Santa Teresa de Jesús, san Juan de la Cruz y san Ignacio de Loyola se citan por su texto castellano original.
+- **Traducción propia.** Los santos que escribieron en latín, francés, italiano o inglés se citan en una traducción fiel hecha para esta extensión desde el original, que es de dominio público.
+- **Textos de la Santa Sede.** El Catecismo y los documentos papales se citan breves y según su texto oficial de vatican.va. © Libreria Editrice Vaticana.
 
-- `extension/`: la extensión, lo único que va en el `.zip`.
-- `docs/`: página pública y política de privacidad (GitHub Pages).
-- `tienda/`: textos e imágenes para la ficha, y el `.zip`.
-- `tools/`:
-  - `gen_vitrales.py`: genera más vitrales con ComfyUI.
-  - `a_webp.py`: los convierte a WebP.
-  - `generar_citas.py`: crea `extension/citas.js` desde `citas_publicacion.json`.
-  - `arnes.html`, `captura.sh` y `prueba_fondo.js`: prueban la extensión y sacan capturas.
-  - `empaquetar.py`: arma el `.zip`.
-- `tools/originales/`: los PNG originales a resolución completa.
+La fuente de cada cita se puede consultar dentro de la extensión, en **Fuentes y créditos**.
+
+## Las imágenes
+
+Todos los vitrales y el icono son **ilustraciones generadas con inteligencia artificial**, creadas para esta extensión con fines devocionales. No son fotografías ni reproducciones de obras existentes, y pueden tener imprecisiones artísticas o iconográficas.
+
+## Privacidad
+
+Bloqueo Santo no recoge ni envía ningún dato. No tiene anuncios, ni analíticas, ni servidores. Tu lista de sitios se guarda en tu navegador y, si tienes activada la sincronización, en tu propia cuenta del navegador.
+
+Política de privacidad completa: <https://duv2312-art.github.io/bloqueo-santo/politica-privacidad.html>
+
+## ¿Encontraste un error?
+
+Si una cita o su referencia tiene un error, o algo no funciona, escribe a **duv5555@hotmail.com** o abre un [*issue*](https://github.com/duv2312-art/bloqueo-santo/issues) en este repositorio.
+
+## Apoyar el proyecto
+
+Bloqueo Santo es gratis y lo seguirá siendo. Si te ayuda y quieres invitar un café, es completamente voluntario: <https://paypal.me/dosvan00>. ¡Gracias, y que Dios te bendiga!
+
+## Lo que viene
+
+Si el tiempo de Dios lo permite, en próximas actualizaciones:
+
+- más variedad de imágenes;
+- citas propias;
+- traducción a otros idiomas.
+
+---
+
+<p align="center"><em>«Velad, y orad para no caer en la tentación» (Mt 26,41).</em></p>
