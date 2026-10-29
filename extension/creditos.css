@@ -1,0 +1,22 @@
+main.ancho { width: min(760px, 100%); }
+section { margin-top: 30px; }
+h2 {
+  font-family: "Cinzel", serif; font-weight: 600; color: var(--oro);
+  font-size: 20px; letter-spacing: .06em; margin-bottom: 10px;
+}
+section p { line-height: 1.45; margin-bottom: 10px; }
+.puntos { list-style: disc; padding-left: 22px; margin: 6px 0 12px; }
+.puntos li {
+  display: list-item; background: none; border: 0; padding: 0; margin-bottom: 8px; line-height: 1.45;
+}
+code { font-size: 15px; color: var(--oro); }
+details {
+  border: 1px solid var(--borde); border-radius: 10px; background: rgba(18, 26, 66, .6);
+  padding: 10px 14px; margin-top: 12px;
+}
+summary { cursor: pointer; color: var(--oro); }
+table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 16px; }
+th { text-align: left; font-family: "Cinzel", serif; font-size: 13px; letter-spacing: .06em; color: var(--oro); }
+th, td { padding: 6px 8px; border-bottom: 1px solid rgba(226, 189, 92, .15); vertical-align: top; }
+@media (max-width: 560px) { table { font-size: 14px; } }
+section a { color: var(--oro); }

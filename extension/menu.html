@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="fuentes/fuentes.css">
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+  <header>
+    <img src="iconos/icono48.png" alt="" width="28" height="28">
+    <span>Bloqueo Santo</span>
+    <button id="cafe" class="cafe" type="button" title="Invitar un café (voluntario)" aria-label="Invitar un café" hidden>
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+        <path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H16" fill="none" stroke="currentColor" stroke-width="1.7"/>
+        <path d="M8 3.5c-.6.9.6 1.6 0 2.5M11 3.5c-.6.9.6 1.6 0 2.5M14 3.5c-.6.9.6 1.6 0 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M3 21h15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <div id="principal">
+    <section id="estado">
+      <p class="dominio" id="dominio">…</p>
+      <p class="detalle" id="detalle"></p>
+    </section>
+
+    <button id="permitir" type="button" hidden>Dar acceso</button>
+    <button id="bloquear" type="button" hidden>Bloquear este sitio</button>
+    <button id="desbloquear" type="button" class="sutil" hidden>Desbloquear este sitio</button>
+    <a id="gestionar" href="#">Ver sitios bloqueados</a>
+  </div>
+
+  <section id="donar" hidden>
+    <p class="detalle">Bloqueo Santo es gratis y lo seguirá siendo. Si te ha ayudado y quieres invitar un café, es completamente voluntario. ¡Gracias y que Dios te bendiga!</p>
+    <div class="montos" id="montos"></div>
+    <form id="otro">
+      <input id="monto" type="number" min="1" step="1" placeholder="Otro monto" aria-label="Otro monto en dólares">
+      <button type="submit">Donar</button>
+    </form>
+    <p class="pie">Se abre PayPal en una pestaña nueva. Montos en dólares (USD).</p>
+    <a id="volverMenu" href="#">Volver</a>
+  </section>
+
+  <script src="config.js"></script>
+  <script src="dominios.js"></script>
+  <script src="reglas.js"></script>
+  <script src="menu.js"></script>
+</body>
+</html>

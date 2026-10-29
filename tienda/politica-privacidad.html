@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bloqueo Santo · Política de privacidad</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      max-width: 720px; margin: 0 auto; padding: 40px 16px 60px;
+      font: 18px/1.55 Georgia, "Times New Roman", serif;
+      background: #fbf8f1; color: #1d1a14;
+    }
+    h1 { font-size: 30px; margin-bottom: 4px; }
+    h2 { font-size: 21px; margin-top: 32px; }
+    .fecha { color: #6b6455; margin-top: 0; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0d1130; color: #f3eee2; }
+      .fecha { color: #a9a294; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Política de privacidad de Bloqueo Santo</h1>
+  <p class="fecha">Última actualización: 29 de octubre de 2026</p>
+
+  <p>Bloqueo Santo es una extensión gratuita para navegadores basados en Chromium (Google Chrome, Microsoft Edge). Bloquea los sitios web que el usuario elige y, en su lugar, muestra una cita de la Sagrada Escritura, del Catecismo de la Iglesia Católica o de los santos.</p>
+
+  <h2>Datos que se recogen</h2>
+  <p><strong>Ninguno.</strong> Bloqueo Santo no recoge, almacena en servidores externos, vende ni comparte información personal o de navegación. No contiene anuncios, analíticas, rastreadores ni código remoto.</p>
+
+  <h2>Datos que se guardan en tu navegador</h2>
+  <ul>
+    <li><strong>La lista de sitios bloqueados.</strong> Se guarda con el almacenamiento de extensiones del navegador (<code>chrome.storage.sync</code>). Si tienes activada la sincronización del navegador, tu propio navegador la sincroniza entre tus dispositivos con tu cuenta. El autor de la extensión no tiene acceso a ella.</li>
+    <li><strong>Las últimas citas e imágenes mostradas.</strong> Se guardan solo en tu equipo (<code>chrome.storage.local</code>), para no repetirlas seguidas.</li>
+  </ul>
+
+  <h2>Permisos y para qué se usan</h2>
+  <ul>
+    <li><strong>Bloqueo de solicitudes (declarativeNetRequest) y acceso a sitios:</strong> sirven para redirigir los sitios de tu lista a la página de bloqueo de la extensión. El navegador aplica estas reglas de forma local. Además, la extensión compara en tu equipo la dirección de tus pestañas con tu lista, para llevar a la página de bloqueo las que ya estaban abiertas y las que vuelven a un sitio bloqueado con el botón Atrás; también la usa para ofrecerte bloquear o desbloquear la pestaña actual desde el icono. No lee el contenido de las páginas, no guarda las direcciones y no las envía a ningún lugar.</li>
+    <li><strong>Almacenamiento (storage):</strong> guarda tu lista de sitios y tus preferencias.</li>
+    <li><strong>Historial (opcional, desactivado por defecto):</strong> solo si lo activas en los ajustes. Se usa únicamente para borrar del historial las visitas a la propia página de bloqueo, de modo que no aparezca entre tus sitios frecuentes. Para eso, el navegador busca en tu equipo las entradas cuya dirección contiene el identificador de la extensión; el resto de tu historial no se guarda, no se analiza y no se envía a ningún lugar.</li>
+  </ul>
+
+  <h2>Donaciones</h2>
+  <p>La extensión incluye un enlace opcional para hacer una donación voluntaria por PayPal. Al pulsarlo se abre la página de PayPal en una pestaña nueva. Cualquier dato de pago lo gestiona PayPal según su propia política de privacidad; la extensión no recibe ni procesa ninguno.</p>
+
+  <h2>Cambios en esta política</h2>
+  <p>Si la extensión cambia de un modo que afecte a la privacidad, esta página se actualizará y se indicará la nueva fecha.</p>
+
+  <h2>Contacto</h2>
+  <p>Para cualquier consulta, escribe en la página del proyecto: <a href="https://github.com/duv2312-art/bloqueo-santo/issues">https://github.com/duv2312-art/bloqueo-santo/issues</a>.</p>
+</body>
+</html>

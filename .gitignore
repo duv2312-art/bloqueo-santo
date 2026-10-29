@@ -1,0 +1,13 @@
+# Paquete generado con tools/empaquetar.py
+tienda/*.zip
+
+# PNG originales a resolución completa (la extensión usa los WebP de extension/fondos)
+tools/originales/
+
+# Borradores de citas anteriores a la revisión de derechos (contienen traducciones con derechos)
+tools/citas.json
+tools/lotes/
+tools/revision_derechos.json
+
+__pycache__/
+*.pyc

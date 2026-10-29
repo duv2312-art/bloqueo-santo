@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Promo Bloqueo Santo</title>
+  <link rel="stylesheet" href="../../extension/fuentes/fuentes.css">
+  <style>
+    * { margin: 0; box-sizing: border-box; }
+    html, body { width: 100vw; height: 100vh; overflow: hidden; background: #05081a; }
+    body {
+      display: flex; align-items: center; gap: 4vh;
+      padding: 0 7vw;
+      background:
+        linear-gradient(90deg, rgba(3, 5, 20, .92) 0%, rgba(3, 5, 20, .72) 42%, rgba(3, 5, 20, .05) 75%),
+        url("../../extension/fondos/vitral_FONDO.webp") right center / cover no-repeat;
+      color: #fbf5e6;
+    }
+    body:not(.pequeno) {
+      background:
+        linear-gradient(90deg, #03050f 0%, #03050f 30%, rgba(3, 5, 20, .75) 45%, rgba(3, 5, 20, 0) 62%),
+        url("../../extension/fondos/vitral_FONDO.webp") right center / auto 100% no-repeat,
+        #03050f;
+    }
+    body:not(.pequeno) h1 { font-size: 10.5vh !important; }
+    body:not(.pequeno) p { font-size: 6.2vh !important; max-width: 40vw !important; }
+    img { width: 24vh; height: 24vh; flex: none; filter: drop-shadow(0 0 3vh rgba(243, 210, 122, .45)); }
+    h1 { font-family: "Cinzel", serif; font-weight: 600; font-size: 13vh; letter-spacing: .04em; color: #f3d27a; line-height: 1; }
+    p { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 7.4vh; margin-top: 2.4vh; line-height: 1.15; max-width: 60vw; }
+    body.pequeno { gap: 5vw; padding: 0 6vw; }
+    body.pequeno img { width: 32vh; height: 32vh; }
+    body.pequeno h1 { font-size: 15vh; }
+    body.pequeno p { font-size: 9.5vh; max-width: 58vw; }
+  </style>
+</head>
+<body>
+  <img src="../../extension/iconos/icono128.png" alt="">
+  <div>
+    <h1>Bloqueo Santo</h1>
+    <p>Convierte cada distracción en un momento con Dios.</p>
+  </div>
+  <script>
+    const q = new URLSearchParams(location.search);
+    document.body.style.backgroundImage = getComputedStyle(document.body).backgroundImage.replace("FONDO", q.get("fondo") || "00");
+    if (q.get("pequeno")) document.body.classList.add("pequeno");
+  </script>
+</body>
+</html>

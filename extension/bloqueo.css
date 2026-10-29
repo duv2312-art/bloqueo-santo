@@ -1,0 +1,206 @@
+:root {
+  --oro: #f3d27a;
+  --oro-suave: #e8c96a;
+  --marfil: #fbf5e6;
+  --tinta: rgba(10, 14, 38, 0.62);
+  --borde: rgba(243, 210, 122, 0.55);
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+html, body { height: 100%; }
+
+body {
+  background: #05081a;
+  color: var(--marfil);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 16px 6vh;
+}
+
+/* Vitral de fondo: dos capas que se funden, con un acercamiento lento */
+.fondo {
+  position: fixed;
+  inset: -2%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 2.2s ease;
+  animation: respirar 46s ease-in-out infinite alternate;
+}
+.fondo.visible { opacity: 1; }
+
+@keyframes respirar {
+  from { transform: scale(1) translate(0, 0); }
+  to   { transform: scale(1.09) translate(-1.2%, -1.5%); }
+}
+
+/* Destello de luz que pasa por el vidrio */
+.luz {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(40vmax 30vmax at var(--x, 30%) 18%, rgba(255, 236, 170, 0.22), transparent 70%);
+  mix-blend-mode: screen;
+  animation: destello 18s ease-in-out infinite alternate;
+}
+@keyframes destello {
+  0%   { --x: 20%; opacity: .55; }
+  50%  { opacity: 1; }
+  100% { --x: 80%; opacity: .6; }
+}
+@property --x { syntax: "<percentage>"; inherits: false; initial-value: 30%; }
+
+.velo {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(3, 5, 20, .88) 0%, rgba(3, 5, 20, .55) 32%, rgba(3, 5, 20, 0) 62%),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, .45) 100%);
+}
+
+.aviso, .tarjeta, .acciones, .ajustes { position: relative; z-index: 2; }
+
+.aviso {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Cinzel", serif;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(251, 245, 230, .82);
+  background: rgba(5, 8, 26, .5);
+  border: 1px solid rgba(243, 210, 122, .3);
+  padding: 7px 16px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+  max-width: calc(100vw - 32px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sitio { color: var(--oro); }
+
+.tarjeta {
+  width: min(880px, 100%);
+  text-align: center;
+  padding: 34px 44px 30px;
+  background: var(--tinta);
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .4) inset, 0 20px 60px rgba(0, 0, 0, .55), 0 0 40px rgba(243, 210, 122, .12);
+  backdrop-filter: blur(10px) saturate(1.2);
+  transition: opacity .9s ease, transform .9s ease;
+}
+.tarjeta.saliendo { opacity: 0; transform: translateY(10px); }
+
+.categoria {
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--oro-suave);
+  margin-bottom: 18px;
+}
+.categoria::before, .categoria::after {
+  content: "";
+  display: inline-block;
+  width: 38px;
+  height: 1px;
+  background: var(--borde);
+  vertical-align: middle;
+  margin: 0 14px;
+}
+
+.cita {
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(24px, 3.1vw, 38px);
+  line-height: 1.32;
+  text-wrap: balance;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .6);
+}
+.cita::before { content: "«"; color: var(--oro); margin-right: .08em; }
+.cita::after  { content: "»"; color: var(--oro); margin-left: .08em; }
+.cita.larga { font-size: clamp(21px, 2.5vw, 31px); }
+
+.fuente {
+  margin-top: 20px;
+  font-family: "Cinzel", serif;
+  font-size: 16px;
+  letter-spacing: .06em;
+  color: var(--oro);
+}
+.fuente .ref:not(:empty)::before { content: "·"; margin: 0 .5em; color: rgba(243, 210, 122, .6); }
+.fuente .ref { color: rgba(251, 245, 230, .78); display: inline-block; }
+
+.acciones {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+button {
+  font-family: "Cinzel", serif;
+  font-size: 14px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #1b1405;
+  background: linear-gradient(180deg, #f7dd92, #d9b04c);
+  border: 1px solid #f7e2a6;
+  border-radius: 999px;
+  padding: 11px 26px;
+  cursor: pointer;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, .45);
+  transition: transform .15s ease, filter .15s ease;
+}
+button:hover { transform: translateY(-1px); filter: brightness(1.07); }
+button:focus-visible { outline: 2px solid var(--marfil); outline-offset: 3px; }
+button.sutil {
+  color: var(--marfil);
+  background: rgba(5, 8, 26, .55);
+  border-color: rgba(243, 210, 122, .4);
+}
+
+.ajustes {
+  position: fixed;
+  right: 18px;
+  bottom: 16px;
+  color: rgba(251, 245, 230, .45);
+  text-decoration: none;
+  font-size: 20px;
+}
+.ajustes:hover { color: var(--oro); }
+
+.nota-ia {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 2;
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(251, 245, 230, .42);
+  text-decoration: none;
+}
+.nota-ia:hover { color: var(--oro); }
+
+@media (max-width: 640px) {
+  .tarjeta { padding: 24px 20px 22px; }
+  .categoria::before, .categoria::after { width: 16px; margin: 0 8px; }
+  .aviso { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fondo, .luz { animation: none; }
+}

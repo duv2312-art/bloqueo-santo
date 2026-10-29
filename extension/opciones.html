@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bloqueo Santo · Sitios</title>
+  <link rel="icon" href="iconos/icono48.png">
+  <link rel="stylesheet" href="fuentes/fuentes.css">
+  <link rel="stylesheet" href="opciones.css">
+</head>
+<body>
+  <main>
+    <h1>Bloqueo Santo</h1>
+    <p class="lema">«Velad, y orad para no caer en la tentación» · Mt 26,41</p>
+
+    <form id="form">
+      <input id="nuevo" type="text" placeholder="Ej.: instagram.com" autocomplete="off" spellcheck="false" aria-label="Sitio a bloquear">
+      <button type="submit">Bloquear</button>
+    </form>
+    <p class="error" id="error"></p>
+
+    <ul id="lista"></ul>
+    <p class="nota">Se bloquea el dominio y todos sus subdominios (www., m., etc.).</p>
+
+    <label class="ajuste">
+      <input type="checkbox" id="historial">
+      <span>
+        Quitar la página de bloqueo del historial, para que no aparezca entre los sitios frecuentes.
+        <small>El navegador pedirá permiso para leer y cambiar el historial. Bloqueo Santo solo borra las visitas a su propia página.</small>
+      </span>
+    </label>
+
+    <footer>
+      <a href="creditos.html">Fuentes, créditos y privacidad</a>
+      <a id="apoyar" href="#" hidden>
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+          <path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+          <path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H16" fill="none" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M8 3.5c-.6.9.6 1.6 0 2.5M11 3.5c-.6.9.6 1.6 0 2.5M14 3.5c-.6.9.6 1.6 0 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        Invitar un café (voluntario)
+      </a>
+    </footer>
+  </main>
+  <script src="config.js"></script>
+  <script src="dominios.js"></script>
+  <script src="opciones.js"></script>
+</body>
+</html>

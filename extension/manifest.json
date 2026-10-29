@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Bloqueo Santo",
+  "version": "1.0.0",
+  "description": "Bloquea los sitios que te distraen y en su lugar te ofrece la Palabra de Dios, el Catecismo y la sabiduría de los santos.",
+  "permissions": [
+    "declarativeNetRequest",
+    "storage"
+  ],
+  "optional_permissions": [
+    "history"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Bloqueo Santo",
+    "default_popup": "menu.html"
+  },
+  "options_page": "opciones.html",
+  "icons": {
+    "16": "iconos/icono16.png",
+    "48": "iconos/icono48.png",
+    "128": "iconos/icono128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "bloqueo.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}

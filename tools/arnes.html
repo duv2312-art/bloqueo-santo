@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <base href="/extension/">
+  <title>Arnés de prueba</title>
+  <!--
+    Carga una página de la extensión con una API de Chrome simulada, para probarla
+    y sacar capturas fuera del navegador. Se sirve desde la raíz del proyecto:
+      python -m http.server 8766        y abrir  /tools/arnes.html?pagina=menu.html&url=https://www.tiktok.com/
+    Parámetros: pagina, url (pestaña activa), sitios (separados por coma), donar=1|abierto, sinacceso=1, cuerpo (clase extra en <body>)
+  -->
+</head>
+<body>
+<script>
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const pagina = q.get("pagina") || "menu.html";
+  const sitios = (q.get("sitios") || "youtube.com").split(",").filter(Boolean);
+  let reglas = [];
+  window.__registro = [];
+  window.chrome = {
+    runtime: { getURL: (p) => "chrome-extension://demo/" + p, openOptionsPage() {}, sendMessage: async () => true },
+    tabs: {
+      query: async () => [{ id: 1, url: q.get("url") || "https://www.youtube.com/" }],
+      update: async (id, o) => __registro.push(["update", o.url]),
+      create: (o) => __registro.push(["create", o.url]),
+    },
+    declarativeNetRequest: {
+      getDynamicRules: async () => reglas,
+      updateDynamicRules: async (o) => { reglas = o.addRules; __registro.push(["reglas", o.addRules.length]); },
+    },
+    permissions: { contains: async (p) => !(p.origins && q.get("sinacceso")), request: async () => true, remove: async () => true },
+    storage: {
+      sync: { get: async () => ({ sitios }), set: async (o) => __registro.push(["sitios", o.sitios]) },
+      local: { get: async () => ({}), set: async () => {} },
+    },
+  };
+  window.close = () => __registro.push(["cerrar"]);
+
+  const html = await (await fetch(pagina, { cache: "no-store" })).text();
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  for (const l of doc.querySelectorAll("head link[rel=stylesheet]")) document.head.append(l.cloneNode());
+  document.title = doc.title;
+  const scripts = [...doc.querySelectorAll("script[src]")].map((s) => s.getAttribute("src"));
+  doc.querySelectorAll("script").forEach((s) => s.remove());
+  document.body.innerHTML = doc.body.innerHTML;
+  if (q.get("cuerpo")) document.body.classList.add(q.get("cuerpo"));
+  for (const src of scripts) {
+    let codigo = await (await fetch(src, { cache: "no-store" })).text();
+    if (src === "config.js" && q.get("donar")) codigo = codigo.replace(/paypal: ""/, 'paypal: "ejemplo"');
+    const s = document.createElement("script");
+    s.textContent = codigo;
+    document.body.append(s);
+  }
+  if (q.get("donar") === "abierto") setTimeout(() => document.getElementById("cafe").click(), 50);
+  // cita=<índice>&fondo=<n>: fija qué se muestra en la página de bloqueo (capturas repetibles)
+  // (sin la transición de fundido: el Edge sin interfaz captura antes de que termine)
+  if (q.get("cita")) {
+    const sinFundido = document.createElement("style");
+    sinFundido.textContent = ".fondo { transition: none !important; }";
+    document.head.append(sinFundido);
+    setTimeout(() => { ponerCita(CITAS[+q.get("cita")]); ponerFondo(+(q.get("fondo") || 0)); }, 100);
+  }
+  // clic=<id>: pulsa ese botón y deja lo que hizo la página en <pre id="registro"> (para --dump-dom)
+  if (q.get("clic") || q.get("registro")) setTimeout(() => {
+    if (q.get("clic")) document.getElementById(q.get("clic")).click();
+    setTimeout(() => {
+      const pre = document.createElement("pre");
+      pre.id = "registro";
+      const visibles = [...document.querySelectorAll("button")].filter((b) => !b.hidden && b.offsetParent).map((b) => b.id || b.textContent);
+      pre.textContent = JSON.stringify({ dominio: document.getElementById("dominio")?.textContent, detalle: document.getElementById("detalle")?.textContent, visibles, registro: __registro });
+      document.body.append(pre);
+    }, 400);
+  }, 300);
+})();
+</script>
+</body>
+</html>

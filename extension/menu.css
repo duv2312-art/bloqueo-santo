@@ -1,0 +1,57 @@
+:root { --oro: #e2bd5c; --marfil: #fbf5e6; --borde: rgba(226, 189, 92, .35); }
+* { box-sizing: border-box; margin: 0; }
+[hidden] { display: none !important; }
+body {
+  width: 300px;
+  padding: 16px 18px 18px;
+  background: radial-gradient(ellipse at top, #1a2a78 0%, #0a0f2c 75%);
+  color: var(--marfil);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  text-align: center;
+}
+header {
+  display: flex; align-items: center; gap: 10px;
+  font-family: "Cinzel", serif; font-weight: 600; letter-spacing: .06em; color: var(--oro);
+  font-size: 16px;
+  padding-bottom: 12px; margin-bottom: 16px;
+  border-bottom: 1px solid var(--borde);
+}
+.dominio { font-size: 24px; font-weight: 600; word-break: break-all; }
+.detalle { font-size: 16px; font-style: italic; opacity: .75; margin-top: 4px; min-height: 1.2em; }
+button {
+  width: 100%; margin-top: 16px;
+  font-family: "Cinzel", serif; font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+  color: #1b1405; background: linear-gradient(180deg, #f7dd92, #d9b04c);
+  border: 0; border-radius: 999px; padding: 11px 16px; cursor: pointer;
+}
+button:hover { filter: brightness(1.07); }
+button.sutil { color: var(--marfil); background: transparent; border: 1px solid var(--borde); }
+button.sutil:hover { border-color: var(--oro); color: var(--oro); }
+
+/* Café: discreto en la esquina del encabezado */
+header .cafe {
+  width: auto; margin: 0 0 0 auto; padding: 4px;
+  background: transparent; border: 0; border-radius: 8px;
+  color: rgba(251, 245, 230, .5); line-height: 0;
+}
+header .cafe:hover { color: var(--oro); filter: none; background: rgba(226, 189, 92, .1); }
+
+#donar .detalle { font-size: 17px; }
+.montos { display: flex; gap: 8px; margin-top: 14px; }
+.montos button { margin: 0; padding: 9px 0; letter-spacing: .04em; }
+#otro { display: flex; gap: 8px; margin-top: 8px; }
+#otro input {
+  flex: 1; min-width: 0;
+  font: inherit; font-size: 17px; color: var(--marfil);
+  background: rgba(10, 15, 44, .7); border: 1px solid var(--borde); border-radius: 999px;
+  padding: 7px 14px;
+}
+#otro input:focus { outline: 2px solid var(--oro); outline-offset: 1px; }
+#otro button { width: auto; margin: 0; padding: 9px 16px; }
+.pie { font-size: 13px; opacity: .55; margin-top: 10px; }
+a {
+  display: inline-block; margin-top: 14px;
+  font-family: "Cinzel", serif; font-size: 12px; letter-spacing: .08em;
+  color: rgba(251, 245, 230, .7); text-decoration: none;
+}
+a:hover { color: var(--oro); }
