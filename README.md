@@ -31,7 +31,7 @@ El detalle de cada cita está en `tools/citas_publicacion.json`: edición, URL d
 ## Publicar en la tienda
 
 1. En `extension/config.js`, pon tu usuario de PayPal.me en `paypal`.
-2. En `tienda/politica-privacidad.html`, cambia `CORREO_DE_CONTACTO` por tu correo y publica esa página (por ejemplo en GitHub Pages).
+2. La política de privacidad está en `docs/politica-privacidad.html` y se publica con GitHub Pages en https://duv2312-art.github.io/bloqueo-santo/politica-privacidad.html
 3. Ejecuta `python tools/empaquetar.py`, que crea `tienda/bloqueo-santo-<versión>.zip`.
 4. **Chrome Web Store:** crea la cuenta de desarrollador (pago único de 5 US$) y sube el `.zip`. Copia los textos de `tienda/ficha-tienda.md` y `tienda/practicas-privacidad.md`.
 5. **Imágenes para la ficha:**
@@ -42,7 +42,8 @@ El detalle de cada cita está en `tools/citas_publicacion.json`: edición, URL d
 ## Carpetas
 
 - `extension/`: la extensión, lo único que va en el `.zip`.
-- `tienda/`: política de privacidad, textos e imágenes para la ficha, y el `.zip`.
+- `docs/`: página pública y política de privacidad (GitHub Pages).
+- `tienda/`: textos e imágenes para la ficha, y el `.zip`.
 - `tools/`:
   - `gen_vitrales.py`: genera más vitrales con ComfyUI.
   - `a_webp.py`: los convierte a WebP.
