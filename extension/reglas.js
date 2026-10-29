@@ -1,6 +1,7 @@
 // Convierte la lista guardada en reglas de redirección hacia la página de bloqueo.
 // La usan el fondo (al cambiar la lista) y el menú (para bloquear al instante).
-const SITIOS_INICIALES = ["youtube.com"];
+// Una instalación nueva empieza sin ningún sitio bloqueado: la lista la arma el usuario
+const SITIOS_INICIALES = [];
 
 function escaparRegex(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

@@ -8,7 +8,7 @@ const assert = require("assert");
 const EXT = path.join(__dirname, "..", "extension");
 const oyentes = {};
 const evento = (nombre) => ({ addListener: (f) => (oyentes[nombre] = f) });
-let sitios = ["youtube.com"];
+let sitios; // instalación nueva: nada guardado
 let reglas = [];
 const actualizadas = [];
 const pestanas = [
@@ -44,9 +44,17 @@ vm.runInContext(fs.readFileSync(path.join(EXT, "background.js"), "utf8"), ctx);
 const espera = () => new Promise((r) => setTimeout(r, 30));
 
 (async () => {
-  // 1. Reglas: la regex de declarativeNetRequest (RE2) es compatible con la de JS en este caso
+  // 0. Una instalación nueva no bloquea nada
   await oyentes.instalar();
   await espera();
+  assert.strictEqual(JSON.stringify(sitios), "[]", "la lista inicial debe quedar vacía");
+  assert.strictEqual(reglas.length, 0, "no debe haber reglas al instalar");
+
+  // 1. Reglas: la regex de declarativeNetRequest (RE2) es compatible con la de JS en este caso
+  sitios = ["youtube.com"];
+  oyentes.cambio({ sitios: {} }, "sync");
+  await espera();
+  actualizadas.length = 0;
   const re = new RegExp(reglas[0].condition.regexFilter);
   for (const u of ["https://youtube.com/", "https://www.youtube.com/watch?v=1", "https://m.youtube.com", "https://www.youtube.com./", "http://youtube.com:443/x"])
     assert(re.test(u), "debería bloquear " + u);
