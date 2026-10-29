@@ -32,13 +32,27 @@ async function pintar() {
     const li = document.createElement("li");
     const nombre = document.createElement("span");
     nombre.textContent = s;
+    const acciones = document.createElement("span");
+    acciones.className = "acciones";
+    // Sin el permiso del sitio, el navegador no deja aplicar el bloqueo
+    if (!(await chrome.permissions.contains(permisoDe(s)))) {
+      const activar = document.createElement("button");
+      activar.textContent = "Activar";
+      activar.title = "Falta el permiso para bloquear este sitio";
+      activar.addEventListener("click", async () => {
+        if (await chrome.permissions.request(permisoDe(s))) pintar();
+      });
+      acciones.append(activar);
+    }
     const quitar = document.createElement("button");
     quitar.textContent = "Quitar";
     quitar.addEventListener("click", async () => {
       await chrome.storage.sync.set({ sitios: (await leer()).filter((x) => x !== s) });
+      await soltarPermiso(s);
       pintar();
     });
-    li.append(nombre, quitar);
+    acciones.append(quitar);
+    li.append(nombre, acciones);
     lista.append(li);
   }
 }
@@ -49,6 +63,11 @@ document.getElementById("form").addEventListener("submit", async (e) => {
   error.textContent = "";
   if (!dominio || !dominio.includes(".")) {
     error.textContent = "Escribe un dominio válido, por ejemplo tiktok.com";
+    return;
+  }
+  // Se pide dentro del clic: el navegador solicita permiso solo para este sitio
+  if (!(await chrome.permissions.request(permisoDe(dominio)))) {
+    error.textContent = "Sin ese permiso el navegador no deja bloquear el sitio.";
     return;
   }
   const sitios = await leer();

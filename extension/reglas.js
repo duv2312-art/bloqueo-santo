@@ -18,6 +18,21 @@ function entradasQueBloquean(host, sitios) {
   return sitios.filter((s) => host === s || host.endsWith("." + s));
 }
 
+// Permiso de acceso de un sitio y sus subdominios. La extensión no pide acceso a todos
+// los sitios: lo pide sitio por sitio, cuando el usuario lo bloquea (la redirección de
+// declarativeNetRequest exige acceso al sitio redirigido).
+function permisoDe(dominio) {
+  return { origins: [`*://${dominio}/*`, `*://*.${dominio}/*`] };
+}
+
+async function soltarPermiso(dominio) {
+  try {
+    await chrome.permissions.remove(permisoDe(dominio));
+  } catch (_) {
+    // Si el navegador no lo deja quitar, no afecta: sin la regla ya no se bloquea
+  }
+}
+
 // La URL original va en el hash tal cual, sin codificar: así llega también desde la regla
 function urlDeBloqueo(original) {
   return chrome.runtime.getURL("bloqueo.html") + "#" + original;

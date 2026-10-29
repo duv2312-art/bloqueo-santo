@@ -13,8 +13,11 @@ Se usa para redirigir a la página de bloqueo de la extensión los sitios que el
 **storage**
 Guarda la lista de sitios bloqueados del usuario y una lista corta de las últimas citas mostradas, para no repetirlas.
 
-**Permiso de host (<all_urls>)**
-El usuario puede bloquear cualquier sitio que elija, y la acción de redirección de declarativeNetRequest exige acceso de host a la URL redirigida. El mismo acceso permite leer la dirección de las pestañas para tres cosas: llevar a la página de bloqueo las pestañas ya abiertas de un sitio recién bloqueado y las que vuelven a él con la navegación interna o con el botón Atrás; y, al pulsar el icono, ofrecer bloquear o desbloquear la pestaña actual. Las direcciones se comparan en el equipo con la lista del usuario y no se guardan ni se envían. No se inyectan scripts ni se lee el contenido de ninguna página.
+**activeTab**
+Cuando el usuario pulsa el icono, se lee la dirección de la pestaña actual para ofrecerle bloquear o desbloquear ese sitio.
+
+**Permisos de host opcionales (optional_host_permissions)**
+La extensión no tiene acceso a ningún sitio al instalarse. Cuando el usuario bloquea un sitio, se pide con chrome.permissions.request acceso solo a ese dominio y a sus subdominios (por ejemplo *://instagram.com/* y *://*.instagram.com/*), porque la acción de redirección de declarativeNetRequest exige acceso de host a la URL redirigida. Al desbloquearlo, el permiso se devuelve con chrome.permissions.remove. Con ese acceso también se lee la dirección de las pestañas de ese sitio, para llevar a la página de bloqueo las que ya estaban abiertas y las que vuelven a él con la navegación interna o con el botón Atrás. No se inyectan scripts, no se lee el contenido de ninguna página y las direcciones no se guardan ni se envían.
 
 **history (opcional; se pide solo si el usuario lo activa en los ajustes)**
 Borra del historial las visitas a la propia página de bloqueo de la extensión (chrome-extension://…/bloqueo.html), para que no aparezca entre los sitios frecuentes de la página de nueva pestaña. Solo se buscan, en el equipo, las entradas cuya dirección contiene el identificador de la extensión; ningún otro dato del historial se guarda ni se envía.

@@ -15,34 +15,24 @@ async function guardarYAplicar(sitios) {
   }
 }
 
+// alPulsar se llama sin esperas previas, para que pueda pedir permisos dentro del clic.
+// Si devuelve false, el menú se queda abierto (por ejemplo, si se negó el permiso).
 function ofrecer(boton, texto, alPulsar) {
+  const original = boton.textContent;
   boton.hidden = false;
   boton.addEventListener("click", async () => {
     boton.disabled = true;
     boton.textContent = texto;
-    await alPulsar();
+    if ((await alPulsar()) === false) {
+      boton.disabled = false;
+      boton.textContent = original;
+      return;
+    }
     window.close();
   });
 }
 
-// Si el usuario limitó el acceso a sitios, las reglas de redirección no se aplican
-async function revisarAcceso() {
-  const ACCESO = { origins: ["<all_urls>"] };
-  if (await chrome.permissions.contains(ACCESO)) return true;
-  mostrar("Falta un permiso", "Para bloquear, Bloqueo Santo necesita acceso a todos los sitios.");
-  const boton = $("permitir");
-  boton.hidden = false;
-  boton.addEventListener("click", async () => {
-    if (await chrome.permissions.request(ACCESO)) {
-      boton.hidden = true;
-      iniciar();
-    }
-  });
-  return false;
-}
-
 async function iniciar() {
-  if (!(await revisarAcceso())) return;
   const [pestana] = await chrome.tabs.query({ active: true, currentWindow: true });
   let url;
   try { url = new URL(pestana.url); } catch (_) { url = null; }
@@ -66,9 +56,19 @@ async function iniciar() {
   const bloqueantes = entradasQueBloquean(host, sitios);
 
   if (bloqueantes.length) {
-    mostrar(bloqueantes[0], "Está bloqueado. Este momento es para Dios.");
+    const dominio = bloqueantes[0];
+    mostrar(dominio, "Está bloqueado. Este momento es para Dios.");
+    // Sitio en la lista pero sin permiso (p. ej. se quitó desde el navegador): el bloqueo no actúa
+    if (!(await chrome.permissions.contains(permisoDe(dominio)))) {
+      mostrar(dominio, "Está en tu lista, pero falta el permiso para bloquearlo.");
+      ofrecer($("permitir"), "Activando…", async () => {
+        if (!(await chrome.permissions.request(permisoDe(dominio)))) return false;
+        await chrome.tabs.update(pestana.id, { url: urlDeBloqueo(original.href) });
+      });
+    }
     ofrecer($("desbloquear"), "Desbloqueando…", async () => {
       await guardarYAplicar(sitios.filter((s) => !bloqueantes.includes(s)));
+      for (const b of bloqueantes) await soltarPermiso(b);
       // Vuelve a abrir el sitio original, ya sin bloqueo
       await chrome.tabs.update(pestana.id, { url: original.href });
     });
@@ -78,6 +78,11 @@ async function iniciar() {
   const dominio = dominioBase(host);
   mostrar(dominio, "¿Te está robando el tiempo?");
   ofrecer($("bloquear"), "Bloqueando…", async () => {
+    // El navegador pide permiso solo para este sitio
+    if (!(await chrome.permissions.request(permisoDe(dominio)))) {
+      mostrar(dominio, "Sin ese permiso el navegador no deja bloquear el sitio.");
+      return false;
+    }
     await guardarYAplicar([...sitios, dominio]);
     // Lleva la pestaña directo a la página de bloqueo; el fondo hace lo mismo con
     // las demás pestañas abiertas de ese sitio

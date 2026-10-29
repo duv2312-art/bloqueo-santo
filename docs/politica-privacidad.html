@@ -22,7 +22,7 @@
 </head>
 <body>
   <h1>Política de privacidad de Bloqueo Santo</h1>
-  <p class="fecha">Última actualización: 29 de octubre de 2026</p>
+  <p class="fecha">Última actualización: 29 de octubre de 2026 (permisos por sitio)</p>
 
   <p>Bloqueo Santo es una extensión gratuita para navegadores basados en Chromium (Google Chrome, Microsoft Edge). Bloquea los sitios web que el usuario elige y, en su lugar, muestra una cita de la Sagrada Escritura, del Catecismo de la Iglesia Católica o de los santos.</p>
 
@@ -37,7 +37,9 @@
 
   <h2>Permisos y para qué se usan</h2>
   <ul>
-    <li><strong>Bloqueo de solicitudes (declarativeNetRequest) y acceso a sitios:</strong> sirven para redirigir los sitios de tu lista a la página de bloqueo de la extensión. El navegador aplica estas reglas de forma local. Además, la extensión compara en tu equipo la dirección de tus pestañas con tu lista, para llevar a la página de bloqueo las que ya estaban abiertas y las que vuelven a un sitio bloqueado con el botón Atrás; también la usa para ofrecerte bloquear o desbloquear la pestaña actual desde el icono. No lee el contenido de las páginas, no guarda las direcciones y no las envía a ningún lugar.</li>
+    <li><strong>Bloqueo de solicitudes (declarativeNetRequest):</strong> sirve para redirigir los sitios de tu lista a la página de bloqueo de la extensión. El navegador aplica estas reglas de forma local.</li>
+    <li><strong>Acceso a sitios, solo a los que bloqueas:</strong> al instalarla, la extensión no tiene acceso a ningún sitio. Cuando bloqueas uno, el navegador te pide permiso solo para ese sitio, porque la redirección lo exige, y al desbloquearlo la extensión devuelve ese permiso. Con él compara en tu equipo la dirección de las pestañas de ese sitio, para llevar a la página de bloqueo las que ya estaban abiertas y las que vuelven a él con el botón Atrás. No lee el contenido de las páginas, no guarda las direcciones y no las envía a ningún lugar.</li>
+    <li><strong>Pestaña activa (activeTab):</strong> cuando pulsas el icono, permite leer la dirección de la pestaña actual para ofrecerte bloquearla o desbloquearla.</li>
     <li><strong>Almacenamiento (storage):</strong> guarda tu lista de sitios y tus preferencias.</li>
     <li><strong>Historial (opcional, desactivado por defecto):</strong> solo si lo activas en los ajustes. Se usa únicamente para borrar del historial las visitas a la propia página de bloqueo, de modo que no aparezca entre tus sitios frecuentes. Para eso, el navegador busca en tu equipo las entradas cuya dirección contiene el identificador de la extensión; el resto de tu historial no se guarda, no se analiza y no se envía a ningún lugar.</li>
   </ul>

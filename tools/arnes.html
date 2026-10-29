@@ -8,7 +8,7 @@
     Carga una página de la extensión con una API de Chrome simulada, para probarla
     y sacar capturas fuera del navegador. Se sirve desde la raíz del proyecto:
       python -m http.server 8766        y abrir  /tools/arnes.html?pagina=menu.html&url=https://www.tiktok.com/
-    Parámetros: pagina, url (pestaña activa), sitios (separados por coma), donar=1|abierto, sinacceso=1, cuerpo (clase extra en <body>)
+    Parámetros: pagina, url (pestaña activa), sitios (separados por coma), donar=1|abierto, sinacceso=1 (sitios sin permiso), niega=1 (el usuario niega el permiso), cuerpo (clase extra en <body>)
   -->
 </head>
 <body>
@@ -30,7 +30,11 @@
       getDynamicRules: async () => reglas,
       updateDynamicRules: async (o) => { reglas = o.addRules; __registro.push(["reglas", o.addRules.length]); },
     },
-    permissions: { contains: async (p) => !(p.origins && q.get("sinacceso")), request: async () => true, remove: async () => true },
+    permissions: {
+      contains: async (p) => !(p.origins && q.get("sinacceso")),
+      request: async (p) => { __registro.push(["pide", (p.origins || p.permissions).join(" ")]); return !q.get("niega"); },
+      remove: async (p) => { __registro.push(["suelta", (p.origins || p.permissions).join(" ")]); return true; },
+    },
     storage: {
       sync: { get: async () => ({ sitios }), set: async (o) => __registro.push(["sitios", o.sitios]) },
       local: { get: async () => ({}), set: async () => {} },

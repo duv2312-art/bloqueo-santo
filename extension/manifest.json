@@ -5,13 +5,14 @@
   "description": "Bloquea los sitios que te distraen y en su lugar te ofrece la Palabra de Dios, el Catecismo y la sabiduría de los santos.",
   "permissions": [
     "declarativeNetRequest",
-    "storage"
+    "storage",
+    "activeTab"
   ],
   "optional_permissions": [
     "history"
   ],
-  "host_permissions": [
-    "<all_urls>"
+  "optional_host_permissions": [
+    "*://*/*"
   ],
   "background": {
     "service_worker": "background.js"
