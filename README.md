@@ -51,7 +51,7 @@ Política de privacidad completa: <https://duv2312-art.github.io/bloqueo-santo/p
 
 ## ¿Encontraste un error?
 
-Si una cita o su referencia tiene un error, o algo no funciona, escribe a **duv5555@hotmail.com** o abre un [*issue*](https://github.com/duv2312-art/bloqueo-santo/issues) en este repositorio.
+Si una cita o su referencia tiene un error, o algo no funciona, escribe a **dosvandiaz1998@gmail.com** o abre un [*issue*](https://github.com/duv2312-art/bloqueo-santo/issues) en este repositorio.
 
 ## Apoyar el proyecto
 
