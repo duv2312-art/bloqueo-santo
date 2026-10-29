@@ -44,4 +44,5 @@ Próximamente, si el tiempo de Dios lo permite: más variedad de imágenes, cita
 
 ## Enlaces
 - Política de privacidad: URL donde publiques `politica-privacidad.html`.
-- Soporte: https://github.com/duv2312-art/bloqueo-santo/issues
+- Correo de soporte (errores en citas o fallos): duv5555@hotmail.com
+- Página del proyecto: https://github.com/duv2312-art/bloqueo-santo
